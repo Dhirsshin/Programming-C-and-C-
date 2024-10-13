@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char input[1000]; // Increased buffer size to handle longer input
+
+    // Read a sentence from input
+    printf("Enter a sentence: ");
+    if (fgets(input, sizeof(input), stdin) == NULL) {
+        fprintf(stderr, "Error reading input.\n");
+        return 1; // Exit if there's an error
+    }
+
+    // Remove the newline character if present
+    size_t length = strlen(input);
+    if (length > 0 && input[length - 1] == '\n') {
+        input[length - 1] = '\0'; // Replace newline with null terminator
+    }
+
+    // Tokenize the string based on spaces
+    char *token = strtok(input, " ");
+    while (token != NULL) {
+        printf("%s\n", token); // Print each word on a new line
+        token = strtok(NULL, " "); // Get the next token
+    }
+
+    return 0; // Exit successfully
+}
